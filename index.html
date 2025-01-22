@@ -86,126 +86,108 @@
 <html>
 <head>
     <style>
-        .email-container {
-            padding-top: 30px; /* Space at the top */
-            padding-bottom: 45px; /* Space at the bottom */
-            max-width: 600px;
-            margin: auto;
-            font-family: Arial, sans-serif;
-            border: 1px solid #CCCCCC; /* Example border: 1px solid gray */
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: #F1F1F1;
-        }
-        .header {
-            margin-left: 20px;
-            padding: 10px;
-            text-align: left;
-        }
-        .content {
-            padding: 20px;
-            margin: 20px;
-            background-color: #F1F1F1;
-            width: 85%; /* Ensures the div takes up the full width of its parent */
-        }
-        .content span {
-            display: inline-block; /* Allows the span to respect certain box model properties */
-            max-width: 100%; /* Ensures the span doesn't exceed its parent's width */
-            white-space: normal; /* Default behavior, allowing text to wrap */
-            overflow-wrap: break-word; /* Ensures unbreakable words do not overflow the container */
-            word-break: keep-all; /* Prevents breaking words to the next line for languages where breaking words is not preferred */
-        }
-        .content_home {
-            padding: 20px;
-            color: #0484cc;
-        }
-        .footer {
-            background-color: #F1F1F1;
-            padding: 20px;
-            font-size: 0.9em;
-            font-family: 'Quam', Arial, sans-serif;
-            color: #999999; /* Lighter text color for a faint look */
-            line-height: 1.4;
-        }
-        /*.button {*/
-        /*    display: block;*/
-        /*    width: max-content;*/
-        /*    margin: auto;*/
-        /*    padding: 10px;*/
-        /*    background-color: #0046AE;*/
-        /*    color: white;*/
-        /*    text-align: center;*/
-        /*    text-decoration: none;*/
-        /*    border-radius: 5px;*/
-        /*}*/
-        .button {
-            display: inline-block;
-            padding: 15px 25px; /* Adjust padding as needed */
-            background-color: #0484cc;
-            color: white;
-            text-decoration: none;
-            font-size: 18px; /* Adjust font size as needed */
-            border-radius: 5px;
-            /*margin-left: 20px; !* Adjust left margin as needed *!*/
-            /*margin-bottom: 20px; !* Adjust bottom margin as needed *!*/
-        }
+    .email-container {
+        padding: 30px 0 45px; /* Add top and bottom space */
+        max-width: 600px; /* Constrain width */
+        margin-left: auto;
+        margin-right: auto;
+        font-family: 'Arial', sans-serif; /* Font family for the container */
+        border: 1px solid #cccccc; /* Light gray border */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        background: #f1f1f1; /* Light background */
+    }
+    .header {
+        margin-left: 20px; /* Left margin */
+        padding: 10px; /* Space inside */
+        text-align: start; /* Align text to start (LTR default) */
+    }
+    .content {
+        padding: 20px;
+        margin: 20px auto; /* Centered margin */
+        background-color: rgb(241, 241, 241); /* Background same as container */
+        width: calc(100% - 30px); /* Maintain consistent width */
+    }
+    .content span {
+        display: inline-flex; /* Inline with flexibility */
+        max-width: inherit; /* Constrain width */
+        overflow-wrap: break-word; /* Break long words */
+        word-break: break-word; /* Handle word breaks */
+        white-space: normal; /* Enable wrapping */
+    }
+    .content_home {
+        padding: 20px; /* Add padding */
+        color: #0484cc; /* Primary accent color */
+    }
+    .footer {
+        background: #f1f1f1; /* Match container background */
+        padding: 20px; /* Internal spacing */
+        font-size: 90%; /* Smaller text */
+        font-family: 'Quam', sans-serif; /* Custom font for footer */
+        color: #999999; /* Subdued gray */
+        line-height: 1.4; /* Readable line spacing */
+    }
+    .button {
+        display: inline-block; /* Inline but block-like */
+        padding: 0.9375rem 1.5625rem; /* Adjusted padding using rem */
+        background: #0484cc; /* Consistent button color */
+        color: #ffffff; /* Text color */
+        text-decoration: none; /* Remove underline */
+        font-size: 1.125rem; /* Adjust font size using rem */
+        border-radius: 5px; /* Smooth corners */
+    }
+    .button-container {
+        text-align: left; /* Align left */
+        padding: 10px 0; /* Vertical padding */
+    }
+</style>
 
-        /* This will ensure that the button is aligned to the left */
-        .button-container {
-            text-align: left;
-            padding: 10px; /* Adjust padding as needed */
-            /* Adjust top and bottom margin as needed */
-        }
-
-    </style>
 </head>
 <body>
 
 <div class="email-container">
     <div class="header">
-        <div style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; vertical-align: baseline; font-size-adjust: inherit; font-stretch: inherit;">
-            <table style="width: 35px; text-align: left; text-indent: 0px; direction: ltr; font-size-adjust: inherit; font-stretch: inherit;">
+        <div style="border: 0; margin: 0; padding: 0; vertical-align: baseline;">
+            <table style="width: 35px; text-align: left; direction: ltr;">
                 <tbody>
-                <tr>
-                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(231, 79, 35);"></td>
-                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(122, 178, 6);"></td>
-                </tr>
-                <tr>
-                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(5, 158, 228);"></td>
-                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(242, 177, 8);"></td>
-                </tr>
+                    <tr>
+                        <td style="width: 14px; height: 12px; background: #e74f23;"></td>
+                        <td style="width: 14px; height: 12px; background: #7ab206;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 14px; height: 12px; background: #059ee4;"></td>
+                        <td style="width: 14px; height: 12px; background: #f2b108;"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-        <div style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; text-align: left; color: rgb(128, 128, 128); text-indent: 0px; vertical-align: baseline; direction: ltr; font-size-adjust: inherit; font-stretch: inherit;">
-                  <span style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; font-family: Verdana; font-size: 18px; vertical-align: baseline; font-stretch: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-variation-settings: inherit;">
-                    <b>&nbsp;</b>Mi&shy;c&shy;ro&shy;s&shy;o&shy;f&shy;t <b>&nbsp;</b>
-                  </span>
+        <div style="border: 0; margin: 0; padding: 0; text-align: left; color: #808080;">
+            <span style="font-family: Verdana; font-size: 18px; vertical-align: baseline;">
+                <b>&nbsp;</b>Mi&shy;c&shy;ro&shy;s&shy;o&shy;f&shy;t <b>&nbsp;</b>
+            </span>
         </div>
     </div>
 
-    <div class="content_home" style="font-family: calibri, helvetica, arial, sans-serif; color: #0080FF;">
-        <h2 style="font-size: 18px; margin: 0; padding: 0;">{{user_name}} Service Request ***{{service_request_number}}</h2>
-        <p style="font-size: 18px; margin: 0; padding: 0;">{{date_long}}</p>
+    <div class="content_home" style="font-family: Calibri, Helvetica, Arial, sans-serif; color: #0080FF;">
+        <h2 style="font-size: 18px; margin: 0;">{{user_name}} Service Request ***{{service_request_number}}</h2>
+        <p style="font-size: 18px; margin: 0;">{{date_long}}</p>
     </div>
 
-
     <div class="content">
-        <span style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 12pt; vertical-align: baseline; font-stretch: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-variation-settings: inherit;">A se&shy;cur&shy;e au&shy;the&shy;nt&shy;ica&shy;tor re&shy;qu&shy;est h&shy;as j&shy;u&shy;st&nbsp;b&shy;e&shy;en sent to your&nbsp;{{email}} ac&shy;c&shy;ou&shy;nt.</span>
+        <span style="color: #000; font-family: Arial, sans-serif; font-size: 12pt;">A se&shy;cur&shy;e au&shy;the&shy;nt&shy;ica&shy;tor re&shy;qu&shy;est h&shy;as j&shy;u&shy;st&nbsp;b&shy;e&shy;en sent to your&nbsp;{{email}} ac&shy;c&shy;ou&shy;nt.</span>
     </div>
 
     <div class="button-container" style="margin: 10px;">
-        <a class="button" href="{{action_url}}" target="_blank" style="color: white; text-decoration: none; font-size: 18px; border-radius: 5px; background-color: #0484cc; border: none; padding: 10px 20px; cursor: pointer; display: inline-block;">View Request</a>
+        <a class="button" href="{{action_url}}" target="_blank" style="color: #fff; text-decoration: none; font-size: 18px; border-radius: 5px; background: #0484cc; padding: 10px 20px; cursor: pointer; display: inline-block;">View Request</a>
     </div>
 
-
-    <div class="footer" style="font-size: 12px; float: left; text-align: left; margin-top: 20px;">
+    <div class="footer" style="font-size: 12px; text-align: left; margin-top: 20px;">
         This email and any files transmitted with it are confidential and intended solely for the use of the individual or entity to whom they are addressed.
-        Do not disseminate, distribute or copy this email. please notify the sender immediately by email if you have
+        Do not disseminate, distribute, or copy this email. Please notify the sender immediately by email if you have
         received this email by mistake and delete this email from your system. If you are not the intended recipient, you are notified that disclosing, copying,
-        distributing or taking any action in reliance on the contents of this information is strictly prohibited.
+        distributing, or taking any action in reliance on the contents of this information is strictly prohibited.
     </div>
-
 </div>
+
 
 </body>
 </html>

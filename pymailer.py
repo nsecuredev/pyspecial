@@ -160,17 +160,14 @@ class PyMailer():
         """
         Parse the entire csv file and return a list of dicts.
         """
-        is_resend = csv_path is not None
         if not csv_path:
             csv_path = self.csv_path
 
         try:
-            # Use 'r' or 'rb' mode for reading the file
             with open(csv_path, 'r', newline='', encoding='utf-8') as csv_file:
                 csv_reader = csv.reader(csv_file)
                 recipient_data_list = []
                 for i, row in enumerate(csv_reader):
-                    # Test indexes exist and validate email address
                     try:
                         recipient_name = row[0].strip() if row[0] else ''
                         recipient_email = self._validate_email(row[1].strip()) if len(row) > 1 else None
@@ -178,12 +175,10 @@ class PyMailer():
                         recipient_name = ''
                         recipient_email = None
 
-                    # Skip rows with invalid or missing email addresses
                     if not recipient_email:
                         logging.error(f"Invalid or missing email in line {i + 1}: {row}")
                         continue
 
-                    # Append valid entries
                     recipient_data_list.append({
                         'name': recipient_name,
                         'email': recipient_email,
