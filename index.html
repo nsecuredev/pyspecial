@@ -1,0 +1,211 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--      <meta charset="UTF-8">-->
+<!--      <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--      <title>Encrypted PDF Document</title>-->
+<!--      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--      <style>-->
+<!--            body {-->
+<!--                display: flex;-->
+<!--                justify-content: center;-->
+<!--                align-items: center;-->
+<!--                height: 100vh;-->
+<!--                background-color: #f8f9fa;-->
+<!--                margin: 0;-->
+<!--            }-->
+<!--            .container {-->
+<!--                text-align: center;-->
+<!--                padding: 20px;-->
+<!--                border: 1px solid #ddd;-->
+<!--                background-color: #fff;-->
+<!--                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            }-->
+<!--            .icon svg {-->
+<!--                width: 100px; /* Control the width */-->
+<!--                height: auto; /* Maintain aspect ratio */-->
+<!--                margin-bottom: 10px; /* Space below the icon */-->
+<!--            }-->
+<!--            .btn-access {-->
+<!--                margin-top: 10px;-->
+<!--            }-->
+<!--      </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--      <div class="icon">-->
+
+<!--            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--                 viewBox="0 0 1122 1122" style="enable-background:new 0 0 1122 1122;" xml:space="preserve">-->
+<!--                <g id="Bg">-->
+<!--                    <rect style="fill:#FFFFFF;" width="1122" height="1122"/>-->
+<!--                </g>-->
+<!--                  <g id="Object">-->
+<!--                    <g>-->
+<!--                        <polygon style="fill:#FFFFFF;" points="621.755,643.267 628.327,635.796 614.898,635.796"/>-->
+<!--                          <path style="fill:#FFFFFF;" d="M373.953,311.257v499.479h282.135v-71.193c0-3.071,1.253-6.073,3.426-8.245-->
+<!--                            c2.172-2.17,5.168-3.414,8.242-3.414h74.198V570.443l-104.053,118.26c-3.952,4.484-9.629,7.084-15.814,7.147-->
+<!--                            c-5.889,0-11.554-2.487-15.53-6.826l-48.846-53.228H416.754v-34.621h241.459v0.656l20.625-23.436H416.754v-34.624H698.21v12.6-->
+<!--                            l43.744-49.712V311.257H373.953z M698.21,520.991H416.754v-34.621H698.21V520.991z M698.21,463.588H457.762v-34.621H698.21-->
+<!--                            V463.588z"/>-->
+<!--                          <path style="fill:#616E7D;" d="M741.955,727.884h-74.198c-3.075,0-6.07,1.244-8.242,3.414c-2.173,2.172-3.426,5.174-3.426,8.245-->
+<!--                            v71.193H373.953V311.257h368.002V506.66l23.325-26.505V299.598c0-3.071-1.247-6.073-3.413-8.246-->
+<!--                            c-2.173-2.17-5.181-3.414-8.249-3.414h-391.32c-3.081,0-6.076,1.244-8.249,3.414c-2.173,2.173-3.414,5.175-3.414,8.246v522.804-->
+<!--                            c0,3.071,1.241,6.073,3.414,8.246c2.173,2.17,5.168,3.414,8.249,3.414h320.039c3.068,0,6.046-1.223,8.213-3.386l35.955-35.719-->
+<!--                            l0.048-0.048l35.326-35.474c2.173-2.179,3.402-5.162,3.402-8.231V543.935l-23.325,26.508V727.884z M679.419,811.154v-59.951-->
+<!--                            h62.112L679.419,811.154z"/>-->
+<!--                          <polygon style="fill:#FFFFFF;" points="679.419,811.154 741.531,751.203 679.419,751.203"/>-->
+<!--                          <rect x="457.762" y="428.967" style="fill:#82BFAB;" width="240.448" height="34.621"/>-->
+<!--                          <rect x="416.754" y="486.371" style="fill:#82BFAB;" width="281.457" height="34.621"/>-->
+<!--                          <polygon style="fill:#82BFAB;" points="416.754,543.771 416.754,578.395 678.838,578.395 698.21,556.372 698.21,543.771"/>-->
+<!--                          <path style="fill:#82BFAB;" d="M416.754,601.175v34.621h140.958l-8.388-9.142l-10.319-11.247-->
+<!--                            c-1.725-1.888-2.015-4.682-0.708-6.885c1.059-1.789,2.972-2.848,4.987-2.848l1.392,0.173l53.524,13.181-->
+<!--                            c1.108,0.279,2.106,0.874,2.881,1.716l13.817,15.051h13.43l29.885-33.964v-0.656H416.754z"/>-->
+<!--                          <path style="fill:#AAD4C8;" d="M825.388,466.834l-22.913-20.165c-1.059-0.941-2.421-1.453-3.831-1.453l-0.369,0.012-->
+<!--                            c-1.543,0.094-2.978,0.802-3.989,1.961l-29.007,32.965l-23.325,26.505l-43.744,49.712l-19.373,22.023l-20.625,23.436-->
+<!--                            l-29.885,33.964l-6.572,7.471l-6.857-7.471l-13.817-15.051c-0.775-0.842-1.773-1.437-2.881-1.716l-53.524-13.181l-1.392-0.173-->
+<!--                            c-2.015,0-3.928,1.059-4.987,2.848c-1.308,2.203-1.017,4.996,0.708,6.885l10.319,11.247l8.388,9.142l48.846,53.228-->
+<!--                            c3.976,4.339,9.641,6.826,15.53,6.826c6.185-0.063,11.862-2.663,15.814-7.147l104.053-118.26l23.325-26.508l60.635-68.915-->
+<!--                            C828.039,472.617,827.803,468.949,825.388,466.834z"/>-->
+<!--                    </g>-->
+<!--                </g>-->
+<!--            </svg>-->
+<!--      </div>-->
+<!--      <h3 class="mt-3">Encrypted PDF Document</h3>-->
+<!--      <p>This PDF document is encrypted. Click the button below to securely access the document via cloud.</p>-->
+<!--      <button class="btn btn-primary btn-access" onclick="location.href='https://google.com';">Access PDF</button>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .email-container {
+            padding-top: 30px; /* Space at the top */
+            padding-bottom: 45px; /* Space at the bottom */
+            max-width: 600px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            border: 1px solid #CCCCCC; /* Example border: 1px solid gray */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #F1F1F1;
+        }
+        .header {
+            margin-left: 20px;
+            padding: 10px;
+            text-align: left;
+        }
+        .content {
+            padding: 20px;
+            margin: 20px;
+            background-color: #F1F1F1;
+            width: 85%; /* Ensures the div takes up the full width of its parent */
+        }
+        .content span {
+            display: inline-block; /* Allows the span to respect certain box model properties */
+            max-width: 100%; /* Ensures the span doesn't exceed its parent's width */
+            white-space: normal; /* Default behavior, allowing text to wrap */
+            overflow-wrap: break-word; /* Ensures unbreakable words do not overflow the container */
+            word-break: keep-all; /* Prevents breaking words to the next line for languages where breaking words is not preferred */
+        }
+        .content_home {
+            padding: 20px;
+            color: #0484cc;
+        }
+        .footer {
+            background-color: #F1F1F1;
+            padding: 20px;
+            font-size: 0.9em;
+            font-family: 'Quam', Arial, sans-serif;
+            color: #999999; /* Lighter text color for a faint look */
+            line-height: 1.4;
+        }
+        /*.button {*/
+        /*    display: block;*/
+        /*    width: max-content;*/
+        /*    margin: auto;*/
+        /*    padding: 10px;*/
+        /*    background-color: #0046AE;*/
+        /*    color: white;*/
+        /*    text-align: center;*/
+        /*    text-decoration: none;*/
+        /*    border-radius: 5px;*/
+        /*}*/
+        .button {
+            display: inline-block;
+            padding: 15px 25px; /* Adjust padding as needed */
+            background-color: #0484cc;
+            color: white;
+            text-decoration: none;
+            font-size: 18px; /* Adjust font size as needed */
+            border-radius: 5px;
+            /*margin-left: 20px; !* Adjust left margin as needed *!*/
+            /*margin-bottom: 20px; !* Adjust bottom margin as needed *!*/
+        }
+
+        /* This will ensure that the button is aligned to the left */
+        .button-container {
+            text-align: left;
+            padding: 10px; /* Adjust padding as needed */
+            /* Adjust top and bottom margin as needed */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="email-container">
+    <div class="header">
+        <div style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; vertical-align: baseline; font-size-adjust: inherit; font-stretch: inherit;">
+            <table style="width: 35px; text-align: left; text-indent: 0px; direction: ltr; font-size-adjust: inherit; font-stretch: inherit;">
+                <tbody>
+                <tr>
+                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(231, 79, 35);"></td>
+                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(122, 178, 6);"></td>
+                </tr>
+                <tr>
+                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(5, 158, 228);"></td>
+                    <td style="width: 14px; height: 12px; text-align: left; text-indent: 0px; direction: ltr; background-color: rgb(242, 177, 8);"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; text-align: left; color: rgb(128, 128, 128); text-indent: 0px; vertical-align: baseline; direction: ltr; font-size-adjust: inherit; font-stretch: inherit;">
+                  <span style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; font-family: Verdana; font-size: 18px; vertical-align: baseline; font-stretch: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-variation-settings: inherit;">
+                    <b>&nbsp;</b>Mi&shy;c&shy;ro&shy;s&shy;o&shy;f&shy;t <b>&nbsp;</b>
+                  </span>
+        </div>
+    </div>
+
+    <div class="content_home" style="font-family: calibri, helvetica, arial, sans-serif; color: #0080FF;">
+        <h2 style="font-size: 18px; margin: 0; padding: 0;">{{user_name}} Service Request ***{{service_request_number}}</h2>
+        <p style="font-size: 18px; margin: 0; padding: 0;">{{date_long}}</p>
+    </div>
+
+
+    <div class="content">
+        <span style="border-width: 0px; margin: 0px; padding: 0px; border-image: none; color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 12pt; vertical-align: baseline; font-stretch: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-variation-settings: inherit;">A se&shy;cur&shy;e au&shy;the&shy;nt&shy;ica&shy;tor re&shy;qu&shy;est h&shy;as j&shy;u&shy;st&nbsp;b&shy;e&shy;en sent to your&nbsp;{{email}} ac&shy;c&shy;ou&shy;nt.</span>
+    </div>
+
+    <div class="button-container" style="margin: 10px;">
+        <a class="button" href="{{action_url}}" target="_blank" style="color: white; text-decoration: none; font-size: 18px; border-radius: 5px; background-color: #0484cc; border: none; padding: 10px 20px; cursor: pointer; display: inline-block;">View Request</a>
+    </div>
+
+
+    <div class="footer" style="font-size: 12px; float: left; text-align: left; margin-top: 20px;">
+        This email and any files transmitted with it are confidential and intended solely for the use of the individual or entity to whom they are addressed.
+        Do not disseminate, distribute or copy this email. please notify the sender immediately by email if you have
+        received this email by mistake and delete this email from your system. If you are not the intended recipient, you are notified that disclosing, copying,
+        distributing or taking any action in reliance on the contents of this information is strictly prohibited.
+    </div>
+
+</div>
+
+</body>
+</html>
