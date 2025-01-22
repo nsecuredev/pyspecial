@@ -112,23 +112,26 @@ class PyMailer():
         """
         try:
             with open(self.html_path, 'rb') as html_file:
-                html_content = html_file.read().decode('utf-8')  # Decode binary content to string
+                html_content = html_file.read().decode('utf-8')
         except IOError:
             raise IOError("Invalid or missing HTML file path.")
 
         if not html_content:
             raise Exception("The HTML file is empty.")
 
-        # Replace all placeholders associated with recipient_data keys
-        if recipient_data:
-            for key, value in recipient_data.items():
-                placeholder = f"{{{{{key}}}}}"  # Template placeholder format: {{key}}
-                html_content = html_content.replace(placeholder, value or '')
+        # Generate the action URL with Base64 email for the recipient
+        if recipient_data and 'email' in recipient_data:
+            recipient_data['action_url'] = config.generate_action_url(config.action_url_template, recipient_data['email'])
+
+        # Replace placeholders with recipient data
+        for key, value in recipient_data.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, value or '')
 
         # Replace placeholders with config variables
         for key, value in vars(config).items():
-            if not key.startswith("__"):  # Skip special/magic variables
-                placeholder = f"{{{{{key}}}}}"  # Template placeholder format: {{key}}
+            if not key.startswith("__"):
+                placeholder = f"{{{{{key}}}}}"
                 html_content = html_content.replace(placeholder, str(value) or '')
 
         return html_content
