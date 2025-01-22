@@ -191,7 +191,7 @@ class PyMailer():
         except IOError:
             raise IOError("Invalid or missing CSV file path.")
 
-    # def send(self, retry_count=0, recipient_list=None):
+    # def send(self, retry_count=0, recipient_list=None, use_ses=False):
     #     """
     #     Iterate over the recipient list and send the specified email.
     #     """
@@ -200,44 +200,64 @@ class PyMailer():
     #         if retry_count:
     #             recipient_list = self._parse_csv(config.CSV_RETRY_FILENAME)
     #
-    #     # Save the number of recipient and time started to the stats file
-    #     if not retry_count:
-    #         self._stats("TOTAL RECIPIENTS: %s" % len(recipient_list))
-    #         self._stats("START TIME: %s" % datetime.now())
+    #     # Choose SMTP settings and override sender details if using SES
+    #     if use_ses:
+    #         smtp_host = config.SES_SMTP_HOST
+    #         smtp_port = config.SES_SMTP_PORT
+    #         from_name = config.SES_FROM_NAME or self.from_name  # Override from_name
+    #         from_email = config.SES_FROM_EMAIL or self.from_email  # Override from_email
+    #         email_password = config.SES_EMAIL_PASSWORD
+    #         account_id = config.SES_ACCOUNT_ID  # Use account ID as username for SES
+    #     else:
+    #         smtp_host = config.SMTP_HOST
+    #         smtp_port = config.SMTP_PORT
+    #         from_name = self.from_name  # Use default from_name
+    #         from_email = self.from_email  # Use default from_email
+    #         email_password = config.EMAIL_PASSWORD
+    #         account_id = config.ACCOUNT_ID  # Default username for regular SMTP
     #
-    #     # Instantiate the number of falied recipients
+    #     # Save the number of recipients and time started
+    #     total_recipients = len(recipient_list)
+    #     self._stats(f"TOTAL RECIPIENTS: {total_recipients}")
+    #     self._stats(f"START TIME: {datetime.now()}")
+    #
     #     failed_recipients = 0
+    #     successful_recipients = 0
     #
-    #     for recipient_data in recipient_list:
-    #         # Instantiate the required vars to send email
-    #         message = self._form_email(recipient_data)
-    #         if recipient_data.get('name'):
-    #             recipient = "%s <%s>" % (recipient_data.get('name'), recipient_data.get('email'))
-    #         else:
-    #             recipient = recipient_data.get('email')
-    #         sender = "%s <%s>" % (self.from_name, self.from_email)
+    #     # Open SMTP connection
+    #     try:
+    #         smtp_server = smtplib.SMTP(host=smtp_host, port=smtp_port)
+    #         smtp_server.starttls()
+    #         if email_password:
+    #             smtp_server.login(account_id, email_password)
     #
-    #         # Send the actual email
-    #         smtp_server = smtplib.SMTP(host=config.SMTP_HOST, port=config.SMTP_PORT)
-    #         try:
-    #             smtp_server.sendmail(sender, recipient, message)
+    #         for i, recipient_data in enumerate(recipient_list, start=1):
+    #             message = self._form_email(recipient_data)
+    #             sender = f"{from_name} <{from_email}>"
+    #             recipient = f"{recipient_data.get('name')} <{recipient_data.get('email')}>" if recipient_data.get(
+    #                 'name') else recipient_data.get('email')
     #
-    #             # Save the last recipient to the stats file incase the process fails
-    #             self._stats("LAST RECIPIENT: %s" % recipient)
+    #             try:
+    #                 smtp_server.sendmail(sender, recipient, message)
+    #                 logging.info(f"Email successfully sent to: {recipient}")
+    #                 successful_recipients += 1
+    #                 print(f"[{i}/{total_recipients}] Successfully sent to: {recipient}")
+    #                 self._stats(f"LAST RECIPIENT: {recipient}")
+    #             except Exception as e:
+    #                 logging.error(f"Failed to send email to {recipient}: {e}")
+    #                 print(f"[{i}/{total_recipients}] Failed to send to: {recipient}. Error: {e}")
+    #                 self._retry_handler(recipient_data)
+    #                 failed_recipients += 1
     #
-    #             # Allow the system to sleep for .25 secs to take load off the SMTP server
-    #             sleep(0.25)
-    #         except:
-    #             logging.error("Recipient email address failed: %s" % recipient)
-    #             self._retry_handler(recipient_data)
+    #         smtp_server.quit()
     #
-    #             # Save the number of failed recipients to the stats file
-    #             failed_recipients = failed_recipients + 1
-    #             self._stats("FAILED RECIPIENTS: %s" % failed_recipients)
+    #     except Exception as e:
+    #         logging.error(f"SMTP connection failed: {e}")
+    #         print(f"SMTP")
 
     def send(self, retry_count=0, recipient_list=None, use_ses=False):
         """
-        Iterate over the recipient list and send the specified email.
+        Iterate over the recipient list and send the specified email with batching to handle SMTP limits.
         """
         if not recipient_list:
             recipient_list = self._parse_csv()
@@ -267,6 +287,7 @@ class PyMailer():
 
         failed_recipients = 0
         successful_recipients = 0
+        batch_size = 100 # Adjust batch size as needed
 
         # Open SMTP connection
         try:
@@ -293,11 +314,22 @@ class PyMailer():
                     self._retry_handler(recipient_data)
                     failed_recipients += 1
 
+                # Reconnect after processing a batch
+                if i % batch_size == 0:
+                    logging.info(f"Processed {i} emails. Reconnecting SMTP session.")
+                    smtp_server.quit()
+                    smtp_server = smtplib.SMTP(host=smtp_host, port=smtp_port)
+                    smtp_server.starttls()
+                    if email_password:
+                        smtp_server.login(account_id, email_password)
+
             smtp_server.quit()
 
         except Exception as e:
             logging.error(f"SMTP connection failed: {e}")
-            print(f"SMTP")
+            print(f"SMTP connection failed. Error: {e}")
+
+        logging.info(f"Email sending completed: {successful_recipients} succeeded, {failed_recipients} failed.")
 
     def send_test(self, use_ses=False):
         """
@@ -310,7 +342,7 @@ class PyMailer():
         Try and resend to failed recipients two more times.
         """
         for i in range(1, 3):
-            self.send(retry_count=i)
+            self.send()
 
     def count_recipients(self, csv_path=None):
         return len(self._parse_csv(csv_path))
